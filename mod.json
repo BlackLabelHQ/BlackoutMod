@@ -5,5 +5,6 @@
     "version": "Prerelease",
     "author": "Derp Princess",
     "description": "Made with heavy inspiration from Wecoc's `Dark Castle` mod.\n\nWho forgot to pay the power bill?!",
+    "defaultEnabled": false,
     "dependencies": []
 }

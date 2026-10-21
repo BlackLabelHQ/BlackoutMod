@@ -1,6 +1,7 @@
 using System;
 using RecompOne.Runtime.Modding;
 using RecompOne.Runtime;
+using RecompOne.Runtime.Config;
 using RecompOne.Runtime.Context;
 using RecompOne.Runtime.Memory;
 using RecompOne.Runtime.Hardware;
@@ -117,25 +118,22 @@ public class BlackoutMod : IMod
 
     private void Save()
     {
-        var view = RecompOne.Runtime.Runtime.View;
-        view.SetInt(Prefix + "castleMode", (int)castleMode);
-        view.SetFloat(Prefix + "dimLevel", dimLevel);
-        view.SetBool(Prefix + "blackoutEntities", blackoutEntities);
-        view.SetBool(Prefix + "invisibleEntities", invisibleEntities);
-        view.SetBool(Prefix + "startingRelics", giveBlackoutStartingRelics);
-        view.SetBool(Prefix + "startingMP", giveMoreStartingMP);
-        RecompOne.Runtime.Runtime.SaveView();
+        Settings.Set(Prefix + "castleMode", (int)castleMode);
+        Settings.Set(Prefix + "dimLevel", dimLevel);
+        Settings.Set(Prefix + "blackoutEntities", blackoutEntities);
+        Settings.Set(Prefix + "invisibleEntities", invisibleEntities);
+        Settings.Set(Prefix + "startingRelics", giveBlackoutStartingRelics);
+        Settings.Set(Prefix + "startingMP", giveMoreStartingMP);
     }
 
     private void Load()
     {
-        var view = RecompOne.Runtime.Runtime.View;
-        castleMode = (CastleMode)view.GetInt(Prefix + "castleMode", (int)CastleMode.Dark);
-        dimLevel = view.GetFloat(Prefix + "dimLevel", 0.05f);
-        blackoutEntities = view.GetBool(Prefix + "blackoutEntities", true);
-        invisibleEntities = view.GetBool(Prefix + "invisibleEntities", false);
-        giveBlackoutStartingRelics = view.GetBool(Prefix + "startingRelics", true);
-        giveMoreStartingMP = view.GetBool(Prefix + "startingMP", true);
+        castleMode = (CastleMode)Settings.Get(Prefix + "castleMode", (int)CastleMode.Dark);
+        dimLevel = Settings.Get(Prefix + "dimLevel", 0.05f);
+        blackoutEntities = Settings.Get(Prefix + "blackoutEntities", true);
+        invisibleEntities = Settings.Get(Prefix + "invisibleEntities", false);
+        giveBlackoutStartingRelics = Settings.Get(Prefix + "startingRelics", true);
+        giveMoreStartingMP = Settings.Get(Prefix + "startingMP", true);
     }
 
     public void OnLoad()
